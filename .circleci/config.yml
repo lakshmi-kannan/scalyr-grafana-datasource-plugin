@@ -37,8 +37,8 @@ jobs:
           command: |
             yarn build
             cp -rf dist/ ~/artifacts/scalyr_plugin/
-            echo ${GIT_SHA}
-            tar -czvf ~/artifacts/scalyr_plugin/target/scalyr_grafana_plugin_${GIT_SHA}.tar.gz ~/artifacts/scalyr_plugin/dist/
+            echo ${GIT_SHA1}
+            tar -czvf ~/artifacts/scalyr_plugin/target/scalyr_grafana_plugin_${GIT_SHA1}.tar.gz ~/artifacts/scalyr_plugin/dist/
       - persist_to_workspace:
           root: ~/artifacts/scalyr_plugin/target/
           paths:
