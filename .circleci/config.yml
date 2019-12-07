@@ -32,7 +32,7 @@ jobs:
           command: |
             yarn build
             cp -rf dist/ ~/artifacts/scalyr_plugin/
-            tar -czvf scalyr_grafana_plugin_${CIRCLE_SHA1}.tar.gz ~/artifacts/scalyr_plugin/
+            tar -czvf ~/artifacts/scalyr_plugin/scalyr_grafana_plugin_${CIRCLE_SHA1}.tar.gz ~/artifacts/scalyr_plugin/
       - persist_to_workspace:
           root: ~/artifacts/scalyr_plugin
           paths:
