@@ -32,7 +32,7 @@ jobs:
           command: |
             yarn build
             cp -rf dist/ ~/artifacts/scalyr_plugin/
-            GIT_SHA=$(echo ${CIRCLE_SHA1} | cut -c -7) tar -czvf ~/artifacts/scalyr_plugin/target/scalyr_grafana_plugin_${GIT_SHA}.tar.gz ~/artifacts/scalyr_plugin/dist/
+            GIT_SHA=$(echo ${CIRCLE_SHA1} | cut -c -7) tar -czvf ~/artifacts/scalyr_plugin/target/scalyr_grafana_plugin_$GIT_SHA.tar.gz ~/artifacts/scalyr_plugin/dist/
       - persist_to_workspace:
           root: ~/artifacts/scalyr_plugin/target/
           paths:
@@ -67,4 +67,3 @@ workflows:
               only: feature/circleci
             tags:
               only: /(?<=^[Vv]|^)(?:(?<major>(?:0|[1-9](?:(?:0|[1-9])+)*))[.](?<minor>(?:0|[1-9](?:(?:0|[1-9])+)*))[.](?<patch>(?:0|[1-9](?:(?:0|[1-9])+)*))(?:-(?<prerelease>(?:(?:(?:[A-Za-z]|-)(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)?|(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)(?:[A-Za-z]|-)(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)?)|(?:0|[1-9](?:(?:0|[1-9])+)*))(?:[.](?:(?:(?:[A-Za-z]|-)(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)?|(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)(?:[A-Za-z]|-)(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)?)|(?:0|[1-9](?:(?:0|[1-9])+)*)))*))?(?:[+](?<build>(?:(?:(?:[A-Za-z]|-)(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)?|(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)(?:[A-Za-z]|-)(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)?)|(?:(?:0|[1-9])+))(?:[.](?:(?:(?:[A-Za-z]|-)(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)?|(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)(?:[A-Za-z]|-)(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)?)|(?:(?:0|[1-9])+)))*))?)$/
-        
