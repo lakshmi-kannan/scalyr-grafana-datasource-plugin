@@ -16,6 +16,11 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - dependency-cache-
       - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export GIT_SHA1=$(echo ${CIRCLE_SHA1} | cut -c -7)" >> $BASH_ENV
+            source $BASH_ENV
+      - run:
           name: yarn install
           command: 'yarn install --pure-lockfile --no-progress'
       - save_cache:
@@ -27,8 +32,6 @@ jobs:
       - run:
           name: Create directories for Artifacts
           command: mkdir -p ~/artifacts/scalyr_plugin/target/
-          environment:
-            GIT_SHA: $(echo ${CIRCLE_SHA1} | cut -c -7)
       - run: 
           name: Build artifacts
           command: |
