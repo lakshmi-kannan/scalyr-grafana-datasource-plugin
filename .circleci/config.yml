@@ -31,17 +31,20 @@ jobs:
           name: Build artifacts
           command: |
             yarn build
-            cp -rf dist/ /home/circleci/artifacts/scalyr_plugin/
+            cp -rf dist/ ~/artifacts/scalyr_plugin/
+      - persist_to_workspace:
+          root: ~/artifacts/scalyr_plugin
+          paths:
+            - dist
       - store_artifacts:
-          path: ~/artifacts
-          destination: dist
+          path: ~/artifacts/scalyr_plugin
   
   deploy-to-github-releases:
     docker: 
       - image: circleci/golang:1.12
     steps:
       - attach_workspace:
-          at: ./artifacts
+          at: ~/artifacts/scalyr_plugin/
       - run:
           name: "Publish Release on GitHub"
           command: |
