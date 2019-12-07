@@ -26,20 +26,20 @@ jobs:
       - run: yarn test
       - run:
           name: Create directories for Artifacts
-          command: mkdir -p ~/artifacts/scalyr_plugin/
+          command: mkdir -p ~/artifacts/scalyr_plugin/target/
       - run: 
           name: Build artifacts
           command: |
             yarn build
             cp -rf dist/ ~/artifacts/scalyr_plugin/
-            tar -czvf ~/artifacts/scalyr_plugin/scalyr_grafana_plugin_${CIRCLE_SHA1}.tar.gz ~/artifacts/scalyr_plugin/dist/
+            tar -czvf ~/artifacts/scalyr_plugin/target/scalyr_grafana_plugin_${CIRCLE_SHA1}.tar.gz ~/artifacts/scalyr_plugin/dist/
             ls ~/artifacts/scalyr_plugin/
       - persist_to_workspace:
-          root: ~/artifacts/scalyr_plugin
+          root: ~/artifacts/scalyr_plugin/target/
           paths:
-            - scalyr_grafana_plugin_${CIRCLE_SHA1}.tar.gz
+            - scalyr_grafana_plugin_*.tar.gz
       - store_artifacts:
-          path: ~/artifacts/scalyr_plugin
+          path: ~/artifacts/scalyr_plugin/target/
           destination: scalyr_grafana_plugin
   
   deploy-to-github-releases:
