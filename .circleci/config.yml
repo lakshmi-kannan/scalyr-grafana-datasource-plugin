@@ -38,13 +38,12 @@ jobs:
   
   deploy-to-github-releases:
     docker: 
-      - image: circleci/golang:1.8
+      - image: circleci/golang:1.12
     steps:
       - attach_workspace:
           at: ./artifacts
       - run:
           name: "Publish Release on GitHub"
-          working_directory: /go/src/github.com/runzexia/circleci-ghr
           command: |
             go get github.com/tcnksm/ghr
             VERSION=${CIRCLE_TAG}
