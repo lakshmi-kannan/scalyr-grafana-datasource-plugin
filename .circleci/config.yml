@@ -38,6 +38,7 @@ jobs:
             - dist
       - store_artifacts:
           path: ~/artifacts/scalyr_plugin
+          destination: scalyr_grafana_plugin
   
   deploy-to-github-releases:
     docker: 
@@ -50,7 +51,7 @@ jobs:
           command: |
             go get github.com/tcnksm/ghr
             VERSION=1.0.0
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} /home/circleci/artifacts/scalyr_plugin/
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} /home/circleci/artifacts/scalyr_plugin/dist/
 
 workflows:
   version: 2
