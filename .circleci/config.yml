@@ -57,13 +57,12 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            echo "export GIT_SHA1=$(echo ${CIRCLE_SHA1} | cut -c -7)" >> $BASH_ENV
+            echo "export VERSION=$(echo ${PLUGIN_VERSION} || echo ${CIRCLE_TAG})" >> $BASH_ENV
             source $BASH_ENV
       - run:
           name: "Publish Release on GitHub"
           command: |
             go get github.com/tcnksm/ghr
-            VERSION=$(echo ${CIRCLE_TAG} || "0.0.1")
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} /home/circleci/artifacts/scalyr_plugin/
 
 workflows:
